@@ -1,0 +1,12 @@
+p.book-text {
+  font-family: 'ITC Charter';
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: -0.0666667px;
+  line-height: 33.1833px;
+  margin: auto;
+  padding: 14px;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  max-width: 700px;
+}
