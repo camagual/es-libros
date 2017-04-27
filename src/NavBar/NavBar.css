@@ -25,7 +25,7 @@ li a.navbar {
     text-decoration: none;
 }
 
-li a:hover:not(.navbar-active) {
+li.right-navbar a.navbar-active:hover:not(.navbar-active) {
     background-color: #111;
 }
 

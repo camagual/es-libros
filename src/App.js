@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import './logo.svg';
 import './App.css';
-import ChapterPage from './book/ChapterPage.js'
+//import ChapterPage from './book/ChapterPage.js'
+import ChapterList from './book/ChapterList.js'
 import NavBar from './NavBar/NavBar.js'
 
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar title={bookName}>
-          <ChapterPage bookName={bookName} chapter={chapter} />
+          <ChapterList bookName={bookName} />
         </NavBar>
       </div>
     );

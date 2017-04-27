@@ -24,7 +24,7 @@ app.get('/books/chapters', (req, res) => {
     res.status(422).send('Missing query parameter "name" (book name)')
   else
     res.status(200)
-      .send(JSON.stringify(library.getBookChaptersByBookName(bookName)))
+      .send(library.getBookDataByName(bookName))
 })
 
 app.get('/books/read', (req, res) => {
@@ -36,7 +36,6 @@ app.get('/books/read', (req, res) => {
   else if (!chapter)
     res.status(422).send('Missing query parameter "chapter" (chapter name)')
   else library.readChapter(bookName, chapter, (err, data) => {
-    console.log('readChapter ' + data.toString())
       if (err)
         res.status(500).send(err)
       else
