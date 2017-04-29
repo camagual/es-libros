@@ -23,7 +23,6 @@ class App extends Component {
 
   render() {
     const bookName = "Harry Potter y la Piedra Filosofal"
-    const chapter = "El niño que vivió"
     return (
       <div className="App">
         <NavBar title={bookName}>

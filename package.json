@@ -2,7 +2,7 @@
   "name": "es-libros",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:8192",
+  "proxy": "http://localhost:8192",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -17,14 +17,19 @@
     "superagent": "^3.5.2"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "@types/body-parser": "^1.16.3",
+    "@types/express": "^4.0.35",
+    "@types/node": "^7.0.14",
+    "react-scripts": "0.9.5",
+    "tsd": "^0.6.5",
+    "typescript": "^2.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-
+    "tsc": "tsc ./backend/server.ts",
     "server": "node ./backend/server.js"
   }
 }

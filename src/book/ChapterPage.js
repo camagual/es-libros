@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { getChapterFile } from '../api'
+import { readChapter } from '../api'
 import markdownToComponentArray from '../markdown'
 import './ChapterPage.css'
 class ChapterPage extends Component {
@@ -27,7 +27,7 @@ class ChapterPage extends Component {
       bookName,
       chapter,
     } = this.props
-    getChapterFile(bookName, chapter)
+    readChapter(bookName, chapter)
       .send()
       .then((resp) => {
          this.setState({ markdown: resp.text })

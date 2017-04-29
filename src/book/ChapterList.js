@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './ChapterList.css'
 
-import { getBookChapters } from '../api'
-
 const ChapterItem = (props) => {
   const chapter = props.chapter
   return (
@@ -34,15 +32,5 @@ export default class ChapterList extends Component {
         </ul>
       </div>
     )
-  }
-
-  componentDidMount() {
-    const bookName = this.props.bookName
-    getBookChapters(bookName)
-      .send()
-      .then((textResp) => {
-        const resp = JSON.parse(textResp.text)
-        this.setState({ chapters: resp.chapters })
-      })
   }
 }
