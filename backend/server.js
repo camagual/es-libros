@@ -13,9 +13,13 @@ app.get('/books/all', (req, res) => {
     .send(JSON.stringify(library.getBooks()))
 })
 
-app.get('/books/all', (req, res) => {
-  res.status(200)
-    .send(JSON.stringify(library.getBooks()))
+app.get('/books/index', (req, res) => {
+  library.readBookIndex((err, data) => {
+    if (err)
+      res.status(500).send(err)
+    else
+      res.status(200).send(data)
+  })
 })
 
 app.get('/books/chapters', (req, res) => {
@@ -43,7 +47,7 @@ app.get('/books/read', (req, res) => {
   })
 })
 
-const server = app.listen(port, function () {
+app.listen(port, function () {
   //eslint-disable-next-line
   console.log('Application listening on  port ' + port);
 });

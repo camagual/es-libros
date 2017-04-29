@@ -12,3 +12,9 @@ export const getBookChapters = (bookName) => {
    return request.get(url)
     .set('Accept', 'application/json')
 }
+
+export const getBookIndex = () => {
+   const url = `/books/index`
+   return request.get(url)
+    .set('Accept', 'application/json')
+}

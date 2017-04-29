@@ -27,6 +27,11 @@ module.exports = {
     })
   },
 
+  readBookIndex: (callback) => {
+    const indexPath = bookPath + '/index.json'
+    fs.readFile(indexPath, callback)
+  },
+
   getBookDataByName: (name) => {
     const bookDir = findBookByName(name)
     if (bookDir === null) return null
