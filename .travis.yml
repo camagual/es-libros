@@ -4,5 +4,6 @@ node_js:
 cache: yarn
 
 script:
+  - yarn run tsc
   - yarn test -- --coverage
   - yarn run build
