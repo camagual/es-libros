@@ -18,3 +18,5 @@ yarn-error.log*
 
 backend/books/
 backend/*.js
+backend/db/*.js
+*.db
