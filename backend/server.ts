@@ -8,7 +8,7 @@ const app = Express()
 
 app.use(bodyParser.json()); // for parsing application/json
 
-app.get('/books/read', (req, res) => {
+app.get('/api/books/read', (req, res) => {
   const bookName = req.query.bookName
   const chapter = req.query.chapter
   if (!bookName)

@@ -12,6 +12,7 @@ ul.book-list {
   list-style: none;
   max-width: 700px;
   margin: auto;
+  text-align: center;
   padding: 14px;
 }
 

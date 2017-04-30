@@ -5,6 +5,10 @@ ul.chapter-list {
   padding: 14px;
 }
 
+h3.chapter-list {
+  text-align: center;
+}
+
 .read-button {
     background-color: #4CAF50; /* Green */
     border: none;

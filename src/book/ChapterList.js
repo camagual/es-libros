@@ -1,33 +1,38 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
+
 import './ChapterList.css'
+import bookIndex from '../bookIndex.js'
 
 const ChapterItem = (props) => {
-  const chapter = props.chapter
+  const {
+    chapterName,
+    chapterIndex,
+    bookId,
+  } = props
+
   return (
-    <li className='chapter-list'><a className='chapter-list'>{chapter}</a></li>
+    <li className='chapter-list'>
+      <Link to={`/book/${bookId}/${chapterIndex}`} className='chapter-list'>
+        {chapterName}
+      </Link>
+    </li>
   )
 }
 
 export default class ChapterList extends Component {
-
-  static propTypes = {
-    bookName: PropTypes.string.isRequired,
-  }
-
-  state = {
-    chapters: [],
-  }
-
   render() {
-    const chapters = this.state.chapters
+    const bookId = this.props.match.params.bookId
+    const chapters = bookIndex.getChapterListById(bookId)
     return (
       <div>
-      <button className="read-button">Comenzar</button>
-        <h3>Capítulos</h3>
+      <Link className="read-button" to={`/book/${bookId}/0`}>Comenzar</Link>
+        <h3 className='chapter-list'>Capítulos</h3>
         <ul className='chapter-list'>
           {
             chapters.map((chapterName, i) =>
-              <ChapterItem key={i} chapter={chapterName} />)
+              <ChapterItem key={i} chapterIndex={i} bookId={bookId}
+                chapterName={chapterName} />)
           }
         </ul>
       </div>

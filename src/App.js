@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom'
 import './logo.svg';
 import './App.css';
-//import ChapterPage from './book/ChapterPage.js'
-//import ChapterList from './book/ChapterList.js'
-import BookList from './book/BookList.js'
-import NavBar from './NavBar/NavBar.js'
+import RouterNavBar from './NavBar/RouterNavBar.js'
 
 class App extends Component {
 
@@ -22,13 +23,10 @@ class App extends Component {
   }
 
   render() {
-    const bookName = "Harry Potter y la Piedra Filosofal"
     return (
-      <div className="App">
-        <NavBar title={bookName}>
-          <BookList />
-        </NavBar>
-      </div>
+      <Router>
+          <Route path="/" component={RouterNavBar} />
+      </Router>
     );
   }
 }

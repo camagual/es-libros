@@ -1,22 +1,25 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import { readChapter } from '../api'
 import markdownToComponentArray from '../markdown'
+import bookIndex from '../bookIndex.js'
 import './ChapterPage.css'
-class ChapterPage extends Component {
 
-  static propTypes = {
-    bookName: PropTypes.string.isRequired,
-    chapter: PropTypes.string.isRequired,
-  }
+class ChapterPage extends Component {
 
   state = {
     markdown: ""
   }
 
   render() {
+    const {
+      bookId,
+      chapterIndex,
+    } = this.props.match.params
+    const title = bookIndex.getChapterByIndex(bookId, chapterIndex)
     return (
       <div>
+        <h2 className="book-markdown">{title}</h2>
         { markdownToComponentArray(this.state.markdown, 'book-markdown') }
       </div>
     )
@@ -24,10 +27,10 @@ class ChapterPage extends Component {
 
   componentDidMount() {
     const {
-      bookName,
-      chapter,
-    } = this.props
-    readChapter(bookName, chapter)
+      bookId,
+      chapterIndex,
+    } = this.props.match.params
+    readChapter(bookId, chapterIndex)
       .send()
       .then((resp) => {
          this.setState({ markdown: resp.text })
