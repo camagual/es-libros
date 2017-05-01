@@ -6,7 +6,9 @@ import bookIndex from '../bookIndex.js'
 import ChapterPage from '../book/ChapterPage.js'
 import ChapterList from '../book/ChapterList.js'
 import BookList from '../book/BookList.js'
-//import Login from '../login/Login.js'
+import Login from '../login/Login.js'
+import GlobalState from '../GlobalState.js'
+
 
 const getTitleFromRoute = (pathname, params) => {
   const match = matchPath(pathname, { path: '/book/:bookId', exact: false })
@@ -18,9 +20,17 @@ const getTitleFromRoute = (pathname, params) => {
 }
 
 export default class RouterNavBar extends React.Component {
+
   render() {
     const pathname = this.props.location.pathname
     const params = this.props.match.params
+    if (GlobalState.needsLogin)
+      return (
+        <NavBar title={getTitleFromRoute(pathname, params)}>
+          <Route exact path="/" component={Login} />
+        </NavBar>
+      )
+
     return (
       <NavBar title={getTitleFromRoute(pathname, params)}>
         <Route exact path="/" component={BookList} />

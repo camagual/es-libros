@@ -15,6 +15,16 @@ export default class User {
     this.likedSongs = []
   }
 
+  toStateObject() {
+    return {
+      username: this.username,
+      lastBook: this.lastBook,
+      lastChapter: this.lastChapter,
+      likedBooks: this.likedBooks,
+      likedSongs: this.likedSongs,
+    }
+  }
+
   static fromDocument(document: any): User {
     const user =  new User(document.username, document.hashedPassword)
     user.lastBook = document.lastBook

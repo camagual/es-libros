@@ -1,23 +1,33 @@
+import * as path from 'path'
 import * as Express from "express";
 import * as bodyParser from "body-parser";
-const sessions = require('client-sessions')
 
 const port: number = process.env.PORT || 8192
-const secret: number = process.env.SESSION_SECRET || "34slfdjkvlgsft3"
 import * as library from "./library";
 import * as dbAdmin from "./db/admin";
+import * as session from "./session";
+import {
+  kickOutUser,
+  validateUserLoggedIn,
+  validateUserNotLoggedIn,
+  validateUserInDB,
+} from "./middleware/sessionMiddleware";
+import {
+  validateLoginRequest,
+} from "./middleware/sanitizationMiddleware";
+import {
+  serveApp,
+} from "./middleware/renderMiddleware";
 
 const app = Express()
 
 app.use(bodyParser.json()); // for parsing application/json
-app.use(sessions({
-  cookieName: 'mySession',
-  secret: secret,
-  duration: 24 * 60 * 60 * 1000,
-  activeDuration: 1000 * 60 * 5
-}));
+app.use(session.expressMiddleware);
 
-app.post('/login', (req: any, res) => {
+app.get('/', serveApp)
+app.use('/', Express.static(path.join(__dirname, '../build')))
+
+app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => {
   const {
     user,
     pass,
@@ -25,7 +35,7 @@ app.post('/login', (req: any, res) => {
   dbAdmin.findUser(user, (userObject) => {
     if (userObject) {
       if (userObject.hashedPassword === pass) {
-        req.mySession.user = user
+        session.setUserSession(user, req)
         res.status(200).send('OK')
       } else
         res.status(422).send(`Password for ${user} is incorrect`)
@@ -34,12 +44,9 @@ app.post('/login', (req: any, res) => {
   })
 })
 
-app.post('/logout', (req: any, res) => {
-  req.mySession.user = undefined
-  res.status(200).send('OK')
-})
+app.post('/logout', validateUserLoggedIn, kickOutUser)
 
-app.get('/api/books/read', (req, res) => {
+app.get('/api/books/read', validateUserLoggedIn, (req, res) => {
   const bookName = req.query.bookName
   const chapter = req.query.chapter
   if (!bookName)
