@@ -8,6 +8,12 @@ export const readChapter = (bookName, chapterName) => {
     .set('Accept', 'application/json')
 }
 
+export const readLyrics = (lyricsId) => {
+   const url = `/api/lyrics/read?lyricsId=${lyricsId}`
+   return request.get(url)
+    .set('Accept', 'application/json')
+}
+
 export const login = (plainUser, plainPass) => {
   return request.post('/login')
     .send({

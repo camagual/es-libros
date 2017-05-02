@@ -17,7 +17,9 @@ yarn-debug.log*
 yarn-error.log*
 
 backend/books/
+backend/lyrics/
 backend/*.js
 backend/db/*.js
 backend/middleware/*.js
+backend/library/*.js
 *.db

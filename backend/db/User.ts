@@ -1,3 +1,5 @@
+const JSCompat = require('../compat/JSCompat.js')
+
 export default class User {
   username: String;
   hashedPassword: String;
@@ -15,14 +17,15 @@ export default class User {
     this.likedSongs = []
   }
 
-  toStateObject() {
-    return {
+  toStateObject(extraData) {
+    const state = {
       username: this.username,
       lastBook: this.lastBook,
       lastChapter: this.lastChapter,
       likedBooks: this.likedBooks,
       likedSongs: this.likedSongs,
     }
+    return JSCompat.assign(state, extraData)
   }
 
   static fromDocument(document: any): User {

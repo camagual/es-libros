@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 import './ChapterList.css'
-import bookIndex from '../bookIndex.js'
+import { getChapterListById } from '../server_data/PreloadedStateQueries.js'
 
 const ChapterItem = (props) => {
   const {
@@ -23,7 +23,7 @@ const ChapterItem = (props) => {
 export default class ChapterList extends Component {
   render() {
     const bookId = this.props.match.params.bookId
-    const chapters = bookIndex.getChapterListById(bookId)
+    const chapters = getChapterListById(bookId)
     return (
       <div>
       <Link className="read-button" to={`/book/${bookId}/0`}>Comenzar</Link>

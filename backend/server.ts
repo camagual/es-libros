@@ -3,7 +3,7 @@ import * as Express from "express";
 import * as bodyParser from "body-parser";
 
 const port: number = process.env.PORT || 8192
-import * as library from "./library";
+import * as library from "./library/library";
 import * as dbAdmin from "./db/admin";
 import * as session from "./session";
 import {
@@ -14,6 +14,8 @@ import {
 } from "./middleware/sessionMiddleware";
 import {
   validateLoginRequest,
+  validateReadBook,
+  validateReadLyrics,
 } from "./middleware/sanitizationMiddleware";
 import {
   serveApp,
@@ -46,14 +48,20 @@ app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => 
 
 app.post('/logout', validateUserLoggedIn, kickOutUser)
 
-app.get('/api/books/read', validateUserLoggedIn, (req, res) => {
+app.get('/api/books/read', validateUserLoggedIn, validateReadBook, (req, res) => {
   const bookName = req.query.bookName
   const chapter = req.query.chapter
-  if (!bookName)
-    res.status(422).send('Missing query parameter "bookName" (book name)')
-  else if (!chapter)
-    res.status(422).send('Missing query parameter "chapter" (chapter name)')
-  else library.readChapter(bookName, chapter, (err, data) => {
+  library.readChapter(bookName, chapter, (err, data) => {
+    if (err)
+      res.status(500).send(err)
+    else
+      res.status(200).send(data.toString())
+  })
+})
+
+app.get('/api/lyrics/read', validateUserLoggedIn, validateReadLyrics, (req, res) => {
+  const lyricsId = req.query.lyricsId
+  library.readLyrics(lyricsId, (err, data) => {
       if (err)
         res.status(500).send(err)
       else
@@ -61,6 +69,7 @@ app.get('/api/books/read', validateUserLoggedIn, (req, res) => {
   })
 })
 
+app.get('*', serveApp)
 app.listen(port, function () {
   //eslint-disable-next-line
   console.log('Application listening on  port ' + port);

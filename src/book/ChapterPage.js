@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { readChapter } from '../api'
 import markdownToComponentArray from '../markdown'
-import bookIndex from '../bookIndex.js'
+import { getChapterByIndex } from '../server_data/PreloadedStateQueries.js'
 import './ChapterPage.css'
 
 class ChapterPage extends Component {
@@ -16,7 +16,7 @@ class ChapterPage extends Component {
       bookId,
       chapterIndex,
     } = this.props.match.params
-    const title = bookIndex.getChapterByIndex(bookId, chapterIndex)
+    const title = getChapterByIndex(bookId, chapterIndex)
     return (
       <div>
         <h2 className="book-markdown">{title}</h2>

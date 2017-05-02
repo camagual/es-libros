@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as session from '../session'
 import * as dbAdmin from '../db/admin'
+import { bookIndex, lyricsIndex } from '../library/library'
 
 
 const indexFilePath = path.join(__dirname, '../../build/index.html')
@@ -28,11 +29,14 @@ const enviarHtmlConState = (res, state) => {
 }
 
 export const serveApp = (req, res) => {
-  const username = session.getUserFromSession(req)
+  const username = session.getUserFromSession(req) as string
   dbAdmin.findUser(username, (user) => {
     let state: any = { needsLogin: true }
     if (user)
-      state = user.toStateObject()
+      state = user.toStateObject({
+          bookIndex,
+          lyricsIndex,
+      })
     enviarHtmlConState(res, state)
   })
 }
