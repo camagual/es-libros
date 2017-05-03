@@ -32,8 +32,6 @@ const enviarHtmlConState = (res, state) => {
 const createTelegram: ((any, string) => string) = (req, username) => {
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   return `${username} has requested the website from ${ip}`
-
-
 }
 
 export const serveApp = (req, res) => {
