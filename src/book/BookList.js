@@ -8,7 +8,7 @@ const BookItem = (props) => {
   const book = props.book
   const index = props.index
   return (
-    <li>
+    <li className="book-list">
       <Link to={`/book/${index}`} className="book-link">
         <span className="book-title">{book.name}</span>
         <br />
@@ -22,7 +22,7 @@ const LyricsItem = (props) => {
   const lyrics = props.lyrics
   const index = props.index
   return (
-    <li>
+    <li className="book-list">
       <Link to={`/lyrics/${index}`} className="book-link">
         <span className="book-title">{lyrics.name}</span>
         <br />

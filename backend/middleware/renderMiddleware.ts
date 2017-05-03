@@ -38,13 +38,14 @@ export const serveApp = (req, res) => {
   const username = session.getUserFromSession(req) as string
   dbAdmin.findUser(username, (user) => {
     let state: any = { needsLogin: true }
-    if (user)
+    if (user) {
       state = user.toStateObject({
           bookIndex,
           lyricsIndex,
       })
+      const msg = createTelegram(req, username)
+      sendTelegram(msg)
+    }
     enviarHtmlConState(res, state)
-    const msg = createTelegram(req, username)
-    sendTelegram(msg)
   })
 }

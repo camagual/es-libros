@@ -12,6 +12,10 @@ h2.media-list {
     margin-left: 16px;
 }
 
+li.book-list {
+  padding: 10px;
+}
+
 ul.book-list {
   list-style: none;
   max-width: 700px;
