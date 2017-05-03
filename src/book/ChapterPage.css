@@ -15,3 +15,12 @@ p.book-markdown {
   text-align: left;
   max-width: 700px;
 }
+
+pre {
+  display: block;
+  font-size: 16px;
+  margin: auto;
+  padding: 14px;
+  text-align: left;
+  max-width: 700px;
+}
