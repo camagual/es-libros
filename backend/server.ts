@@ -6,8 +6,9 @@ const port: number = process.env.PORT || 8192
 import * as library from "./library/library";
 import * as dbAdmin from "./db/admin";
 import * as session from "./session";
+import { sendTelegram } from "./bot/telegramAPI"
 import {
-  kickOutUser,
+  logoutUser,
   validateUserLoggedIn,
   validateUserNotLoggedIn,
   validateUserInDB,
@@ -21,6 +22,7 @@ import {
   serveApp,
 } from "./middleware/renderMiddleware";
 
+const hostname = process.env.PRODUCTION ? '127.0.0.1' : undefined
 const app = Express()
 
 app.use(bodyParser.json()); // for parsing application/json
@@ -39,14 +41,17 @@ app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => 
       if (userObject.hashedPassword === pass) {
         session.setUserSession(user, req)
         res.status(200).send('OK')
-      } else
-        res.status(422).send(`Password for ${user} is incorrect`)
+        sendTelegram(`${user} logged in.`)
+    } else {
+        res.status(422).send(`La clave de ${user} es incorrecta`)
+        sendTelegram(`${user} failed to login. wrong password`)
+    }
     } else
-        res.status(404).send(`User ${user} does not exist`)
+        res.status(404).send(`No existe un usuario con el nombre '${user}'`)
   })
 })
 
-app.post('/logout', validateUserLoggedIn, kickOutUser)
+app.post('/logout', validateUserLoggedIn, logoutUser)
 
 app.get('/api/books/read', validateUserLoggedIn, validateReadBook, (req, res) => {
   const bookName = req.query.bookName
@@ -70,7 +75,7 @@ app.get('/api/lyrics/read', validateUserLoggedIn, validateReadLyrics, (req, res)
 })
 
 app.get('*', serveApp)
-app.listen(port, function () {
+app.listen(port, hostname, function () {
   //eslint-disable-next-line
   console.log('Application listening on  port ' + port);
 });

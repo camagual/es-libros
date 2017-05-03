@@ -34,3 +34,8 @@ export const kickOutUser = (req, res) => {
   session.removeUserSession(req)
   res.redirect('/')
 }
+
+export const logoutUser = (req, res) => {
+  session.removeUserSession(req)
+  res.status(200).send('OK')
+}

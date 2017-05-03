@@ -38,7 +38,7 @@ export default class Login extends Component {
   render() {
     return (
       <form className="login-form">
-      	<h2>Please Log In</h2>
+      	<h2>Por favor inicia sesión</h2>
         <LoginError error={this.state.error} />
       	<fieldset className="material-login">
       		<input ref={(input) => this.userInput = input} className="material-login" type="text" required/>

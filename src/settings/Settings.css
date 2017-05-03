@@ -1,0 +1,15 @@
+button.settings {
+    background-color: #FF4C4C; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    cursor: pointer;
+    overflow: hidden;
+}

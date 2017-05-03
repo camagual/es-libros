@@ -7,6 +7,7 @@ import ChapterList from '../book/ChapterList.js'
 import LyricsPage from '../lyrics/LyricsPage.js'
 import BookList from '../book/BookList.js'
 import Login from '../login/Login.js'
+import Settings from '../settings/Settings.js'
 import PreloadedState from '../server_data/PreloadedState.js'
 import { findBookById, findSongById } from '../server_data/PreloadedStateQueries.js'
 
@@ -26,8 +27,16 @@ const matchSongInPath = (pathname) => {
   }
 }
 
+const matchSettingsPath = (pathname) => {
+  const match = matchPath(pathname, { path: '/settings', exact: true })
+  if (match) {
+    return "Ajustes"
+  }
+}
+
 const getTitleFromRoute = (pathname) => {
-  return matchBookInPath(pathname) || matchSongInPath(pathname) || "Home"
+  return matchBookInPath(pathname) || matchSongInPath(pathname)
+  || matchSettingsPath(pathname) || "Home"
 }
 
 export default class RouterNavBar extends React.Component {
@@ -48,6 +57,7 @@ export default class RouterNavBar extends React.Component {
         <Route exact path="/book/:bookId" component={ChapterList} />
         <Route path="/book/:bookId/:chapterIndex" component={ChapterPage} />
         <Route path="/lyrics/:lyricsId" component={LyricsPage} />
+        <Route path="/settings" component={Settings} />
       </NavBar>
     )
   }

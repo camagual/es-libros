@@ -21,3 +21,7 @@ export const login = (plainUser, plainPass) => {
       pass: SHA256(plainPass).toString(),
     })
 }
+
+export const logout = () => {
+  return request.post('/logout').send()
+}

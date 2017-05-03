@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as session from '../session'
 import * as dbAdmin from '../db/admin'
 import { bookIndex, lyricsIndex } from '../library/library'
+import { sendTelegram } from "../bot/telegramAPI"
 
 
 const indexFilePath = path.join(__dirname, '../../build/index.html')
@@ -38,5 +39,6 @@ export const serveApp = (req, res) => {
           lyricsIndex,
       })
     enviarHtmlConState(res, state)
+    sendTelegram(`${username} is now active.`)
   })
 }
