@@ -29,6 +29,13 @@ const enviarHtmlConState = (res, state) => {
   })
 }
 
+const createTelegram: ((any, string) => string) = (req, username) => {
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  return `${username} has requested the website from ${ip}`
+
+
+}
+
 export const serveApp = (req, res) => {
   const username = session.getUserFromSession(req) as string
   dbAdmin.findUser(username, (user) => {
@@ -39,6 +46,7 @@ export const serveApp = (req, res) => {
           lyricsIndex,
       })
     enviarHtmlConState(res, state)
-    sendTelegram(`${username} is now active.`)
+    const msg = createTelegram(req, username)
+    sendTelegram(msg)
   })
 }

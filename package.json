@@ -38,6 +38,6 @@
     "eject": "react-scripts eject",
     "tsc": "tsc ./backend/server.ts",
     "server": "node ./backend/server.js",
-    "addUser": "tsc ./backend/db/addUser.ts && node ./backend/db/addUser.js",
+    "addUser": "tsc ./backend/db/addUser.ts && node ./backend/db/addUser.js"
   }
 }
