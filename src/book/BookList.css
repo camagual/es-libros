@@ -8,6 +8,10 @@
   font-size: 14px;
 }
 
+h2.media-list {
+    margin-left: 16px;
+}
+
 ul.book-list {
   list-style: none;
   max-width: 700px;

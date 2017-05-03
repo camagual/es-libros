@@ -40,13 +40,13 @@ export default class BookList extends Component {
   render() {
     return (
       <div>
-        <h2>Libros</h2>
+        <h2 className='media-list'>Libros</h2>
         <ul className='book-list'>
           {
             bookIndex.map((book, i) => <BookItem key={i} index={i} book={book} />)
           }
         </ul>
-        <h2>Canciones</h2>
+        <h2 className='media-list'>Canciones</h2>
         <ul className='book-list'>
           {
             lyricsIndex.map((lyrics, i) => <LyricsItem key={i} index={i} lyrics={lyrics} />)
