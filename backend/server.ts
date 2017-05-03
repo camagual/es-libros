@@ -7,6 +7,7 @@ import * as library from "./library/library";
 import * as dbAdmin from "./db/admin";
 import * as session from "./session";
 import { sendTelegram } from "./bot/telegramAPI"
+import { serveSecretMessage } from "./middleware/secretMiddleware"
 import {
   logoutUser,
   validateUserLoggedIn,
@@ -74,7 +75,10 @@ app.get('/api/lyrics/read', validateUserLoggedIn, validateReadLyrics, (req, res)
   })
 })
 
+serveSecretMessage(app)
+
 app.get('*', serveApp)
+
 app.listen(port, hostname, function () {
   //eslint-disable-next-line
   console.log('Application listening on  port ' + port);
