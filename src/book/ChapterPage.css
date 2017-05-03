@@ -16,7 +16,16 @@ p.book-markdown {
   max-width: 700px;
 }
 
+code {
+  max-width: 700px;
+  overflow-y: auto;
+  display: block;
+}
 pre {
+  -webkit-box-sizing: border-box; /* Safari, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+
   display: block;
   font-size: 16px;
   margin: auto;
