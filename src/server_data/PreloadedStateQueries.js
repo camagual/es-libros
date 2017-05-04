@@ -28,7 +28,9 @@ const getChapterListById = (bookId) => {
 
 const getChapterByIndex = (bookId, chapterIndex) => {
   const selectedBook = findBookById(bookId)
-  if (selectedBook)
+  if (selectedBook
+    && chapterIndex >= 0 &&
+    chapterIndex < selectedBook.chapters.length)
     return selectedBook.chapters[chapterIndex]
   return null
 }

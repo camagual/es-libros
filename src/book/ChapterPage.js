@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 import { readChapter } from '../api'
 import markdownToComponentArray from '../markdown'
 import { getChapterByIndex } from '../server_data/PreloadedStateQueries.js'
 import './ChapterPage.css'
+
+const NextChapterButton = (props) => {
+  const bookId  = props.bookId
+  const chapterIndex  = props.chapterIndex
+  if (chapterIndex)
+    return (
+      <Link className="next-chapter" to={`/book/${bookId}/${chapterIndex}`}>
+        Siguiente Capitulo
+      </Link>
+    )
+  return null
+}
+
+const nextIndex = (i) => {
+  return parseInt(i, 10) + 1
+}
 
 class ChapterPage extends Component {
 
@@ -21,6 +38,7 @@ class ChapterPage extends Component {
       <div>
         <h2 className="book-markdown">{title}</h2>
         { markdownToComponentArray(this.state.markdown, 'book-markdown') }
+        <NextChapterButton bookId={bookId} chapterIndex={nextIndex(chapterIndex)} />
       </div>
     )
   }
