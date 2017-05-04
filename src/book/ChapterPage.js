@@ -18,8 +18,10 @@ const NextChapterButton = (props) => {
   return null
 }
 
-const nextIndex = (i) => {
-  return parseInt(i, 10) + 1
+const nextIndex = (bookId, i) => {
+  const newIndex = parseInt(i, 10) + 1
+  if (getChapterByIndex(bookId, newIndex))
+    return newIndex
 }
 
 class ChapterPage extends Component {
@@ -28,22 +30,7 @@ class ChapterPage extends Component {
     markdown: ""
   }
 
-  render() {
-    const {
-      bookId,
-      chapterIndex,
-    } = this.props.match.params
-    const title = getChapterByIndex(bookId, chapterIndex)
-    return (
-      <div>
-        <h2 className="book-markdown">{title}</h2>
-        { markdownToComponentArray(this.state.markdown, 'book-markdown') }
-        <NextChapterButton bookId={bookId} chapterIndex={nextIndex(chapterIndex)} />
-      </div>
-    )
-  }
-
-  componentDidMount() {
+  fetchChapter = () => {
     const {
       bookId,
       chapterIndex,
@@ -53,6 +40,31 @@ class ChapterPage extends Component {
       .then((resp) => {
          this.setState({ markdown: resp.text })
       })
+  }
+
+  render() {
+    const {
+      bookId,
+      chapterIndex,
+    } = this.props.match.params
+    const title = getChapterByIndex(bookId, chapterIndex)
+    const nextChapter = nextIndex(bookId, chapterIndex)
+    return (
+      <div>
+        <h2 className="book-markdown">{title}</h2>
+        { markdownToComponentArray(this.state.markdown, 'book-markdown') }
+        <NextChapterButton bookId={bookId} chapterIndex={nextChapter} />
+      </div>
+    )
+  }
+
+  componentWillReceiveProps() {
+    this.setState({markdown: ""})
+    this.fetchChapter()
+  }
+
+  componentDidMount() {
+    this.fetchChapter()
   }
 }
 
