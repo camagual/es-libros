@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { readChapter } from '../api'
 import markdownToComponentArray from '../markdown'
 import { getChapterByIndex } from '../server_data/PreloadedStateQueries.js'
+import ProgressWheel from '../comp/ProgressWheel'
+
 import './ChapterPage.css'
 
 const NextChapterButton = (props) => {
@@ -42,7 +44,7 @@ class ChapterPage extends Component {
       })
   }
 
-  render() {
+  renderChapterText = () => {
     const {
       bookId,
       chapterIndex,
@@ -56,6 +58,19 @@ class ChapterPage extends Component {
         <NextChapterButton bookId={bookId} chapterIndex={nextChapter} />
       </div>
     )
+  }
+
+  renderProgressWheel = () => {
+    return <ProgressWheel />
+  }
+
+  render() {
+    if (this.state.markdown === "")
+      return this.renderProgressWheel()
+    else
+      return this.renderChapterText()
+
+
   }
 
   componentWillReceiveProps() {

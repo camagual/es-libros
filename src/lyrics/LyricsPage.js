@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import './LyricsPage.css'
 
+import ProgressWheel from '../comp/ProgressWheel'
 import { readLyrics } from '../api'
 import markdownToComponentArray from '../markdown'
 import { findSongById } from '../server_data/PreloadedStateQueries.js'
@@ -13,7 +14,7 @@ export default class LyricsPage extends Component {
     markdown: ""
   }
 
-  render() {
+  renderLyrics() {
     const song = findSongById(this.props.match.params.lyricsId)
     return (
       <div>
@@ -28,6 +29,17 @@ export default class LyricsPage extends Component {
     )
   }
 
+  renderProgressWheel = () => {
+    return <ProgressWheel />
+  }
+
+  render() {
+    if (this.state.markdown === "")
+      return this.renderProgressWheel()
+    else
+      return this.renderLyrics()
+  }
+
   componentDidMount() {
     const lyricsId = this.props.match.params.lyricsId
     readLyrics(lyricsId)
@@ -35,6 +47,5 @@ export default class LyricsPage extends Component {
       .then((resp) => {
          this.setState({ markdown: resp.text })
       })
-
   }
 }
