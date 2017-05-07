@@ -13,6 +13,7 @@ p.book-markdown {
   padding: 14px;
   text-rendering: optimizeLegibility;
   text-align: left;
+  text-indent: 30px;
   max-width: 700px;
 }
 
