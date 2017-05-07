@@ -32,11 +32,27 @@ class ChapterPage extends Component {
     markdown: ""
   }
 
-  fetchChapter = () => {
+  pageHasChanged = (nextProps) => {
+
     const {
       bookId,
       chapterIndex,
     } = this.props.match.params
+    const {
+      nextBookId,
+      nextChapterIndex,
+    } = nextProps.match.params
+
+    return nextBookId !== bookId || nextChapterIndex !== chapterIndex
+
+
+  }
+
+  fetchChapter = (props) => {
+    const {
+      bookId,
+      chapterIndex,
+    } = props.match.params
     readChapter(bookId, chapterIndex)
       .send()
       .then((resp) => {
@@ -73,13 +89,15 @@ class ChapterPage extends Component {
 
   }
 
-  componentWillReceiveProps() {
-    this.setState({markdown: ""})
-    this.fetchChapter()
+  componentWillReceiveProps(nextProps) {
+    if (this.pageHasChanged(nextProps)) {
+      this.setState({markdown: ""})
+      this.fetchChapter(nextProps)
+    }
   }
 
   componentDidMount() {
-    this.fetchChapter()
+    this.fetchChapter(this.props)
   }
 }
 
