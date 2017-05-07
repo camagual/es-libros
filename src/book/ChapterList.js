@@ -35,6 +35,7 @@ export default class ChapterList extends Component {
                 chapterName={chapterName} />)
           }
         </ul>
+        <div style={{height: '60px'}} />
       </div>
     )
   }
