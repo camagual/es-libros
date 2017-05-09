@@ -9,7 +9,8 @@ userdb.ensureIndex({fieldName: 'username', unique: true }, (err) => {
 })
 
 export const findUser = (username: string, callback: (username: User | null) => void) => {
-  userdb.findOne({ username }, (err, doc) => {
+  const lowercaseName = username.toLowerCase()
+  userdb.findOne({ username: lowercaseName }, (err, doc) => {
     if (doc === null) callback(null)
     else callback(User.fromDocument(doc))
   })
@@ -17,7 +18,8 @@ export const findUser = (username: string, callback: (username: User | null) => 
 
 export const addUser = (username: string, plainPassword: string,
   callback: (error: Error, username: User) => void) => {
-  const newUser = new User(username, SHA256(plainPassword).toString())
+  const lowercaseName = username.toLowerCase()
+  const newUser = new User(lowercaseName, SHA256(plainPassword).toString())
   userdb.insert(newUser, (err) => {
     callback(err, newUser)
   })
