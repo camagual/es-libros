@@ -1,8 +1,8 @@
 ul.chapter-list {
-  list-style: decimal;   
+  list-style-type: decimal;
   max-width: 700px;
   margin: auto;
-  padding: 14px;
+  padding: 14px 14px 14px 35px;
 }
 
 h3.chapter-list {
