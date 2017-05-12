@@ -14,8 +14,12 @@ import { findBookById, findSongById } from '../server_data/PreloadedStateQueries
 const matchBookInPath = (pathname) => {
   const match = matchPath(pathname, { path: '/book/:bookId', exact: false })
   if (match) {
-    const book = findBookById(match.params.bookId)
-    return book.name
+    const bookId = match.params.bookId
+    const book = findBookById(bookId)
+    return {
+      title: book.name,
+      url: `/book/${bookId}`,
+    }
   }
 }
 
@@ -23,36 +27,36 @@ const matchSongInPath = (pathname) => {
   const match = matchPath(pathname, { path: '/lyrics/:lyricsId', exact: false })
   if (match) {
     const song = findSongById(match.params.lyricsId)
-    return song.name
+    return { title: song.name }
   }
 }
 
 const matchSettingsPath = (pathname) => {
   const match = matchPath(pathname, { path: '/settings', exact: true })
   if (match) {
-    return "Ajustes"
+    return { title: "Ajustes" }
   }
 }
 
-const getTitleFromRoute = (pathname) => {
+const getTitlePropsFromRoute = (pathname) => {
   return matchBookInPath(pathname) || matchSongInPath(pathname)
-  || matchSettingsPath(pathname) || "Home"
+  || matchSettingsPath(pathname) || { title: "Home" }
 }
 
 export default class RouterNavBar extends React.Component {
-
   render() {
     const pathname = this.props.location.pathname
-    const params = this.props.match.params
+    const titleProps = getTitlePropsFromRoute(pathname)
+
     if (PreloadedState.needsLogin)
       return (
-        <NavBar title={getTitleFromRoute(pathname, params)}>
+        <NavBar {...titleProps}>
           <Login />
         </NavBar>
       )
 
     return (
-      <NavBar title={getTitleFromRoute(pathname, params)}>
+      <NavBar {...titleProps}>
         <Route exact path="/" component={BookList} />
         <Route exact path="/book/:bookId" component={ChapterList} />
         <Route path="/book/:bookId/:chapterIndex" component={ChapterPage} />
