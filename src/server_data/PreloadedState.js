@@ -6,11 +6,17 @@ const testState = {
       "author":"J.K. Rowling",
       "year":1997,
       "chapters": [
-        "El niño que vivió"
+        "El niño que vivió",
+        "El vidrio que se rompió"
       ]
     }
   ],
   lyricsIndex: [
+    {
+      "name":"Labios de Miel",
+      "artist":"Luis Miguel",
+      "youtube":"https://www.youtube.com/embed/7QdVFQhkL8g"
+    },
     {
       "name":"Labios de Miel",
       "artist":"Luis Miguel",

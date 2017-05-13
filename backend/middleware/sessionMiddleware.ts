@@ -19,20 +19,22 @@ export const validateUserNotLoggedIn = (req: Request, res: any, next: any) => {
 
 export const validateUserInDB = (req, res, next) => {
   const username = session.getUserFromSession(req)
-  dbAdmin.findUser(username, (user) => {
-    if (user) {
-      req.userObject = user
-      next()
-    } else {
-      kickOutUser(req, res)
-    }
-  })
+  if (username)
+      dbAdmin.findUser(username, (user) => {
+        if (user) {
+          req.userObject = user
+          next()
+        } else {
+          kickOutUser(req, res)
+        }
+      })
+  else kickOutUser(req, res)
 
 }
 
 export const kickOutUser = (req, res) => {
   session.removeUserSession(req)
-  res.redirect('/')
+  res.status(401).send('Unauthenticated')
 }
 
 export const logoutUser = (req, res) => {

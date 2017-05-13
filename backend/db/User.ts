@@ -5,6 +5,7 @@ export default class User {
   hashedPassword: String;
   lastBook: number | null;
   lastChapter: number;
+  bookmarks: {};
   likedBooks: number[];
   likedSongs: number[];
 
@@ -13,8 +14,17 @@ export default class User {
     this.hashedPassword = pass
     this.lastBook = null
     this.lastChapter = 0
+    this.bookmarks = {}
     this.likedBooks = []
     this.likedSongs = []
+  }
+
+  addBookmarks(bookId: number, chapterIndex: number, bookmarkFraction: number) {
+      this.bookmarks[`_${bookId}ch${chapterIndex}`] = bookmarkFraction
+  }
+
+  findBookmark(bookId: number, chapterIndex: number): number | undefined {
+      return this.bookmarks[`_${bookId}ch${chapterIndex}`]
   }
 
   toStateObject(extraData) {
@@ -22,6 +32,7 @@ export default class User {
       username: this.username,
       lastBook: this.lastBook,
       lastChapter: this.lastChapter,
+      bookmarks: this.bookmarks,
       likedBooks: this.likedBooks,
       likedSongs: this.likedSongs,
     }
@@ -32,6 +43,7 @@ export default class User {
     const user =  new User(document.username, document.hashedPassword)
     user.lastBook = document.lastBook
     user.lastChapter = document.lastChapter
+    user.bookmarks = document.bookmarks
     user.likedBooks = document.likedBooks
     user.likedSongs = document.likedSongs
     return user

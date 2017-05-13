@@ -18,6 +18,7 @@ import {
   validateLoginRequest,
   validateReadBook,
   validateReadLyrics,
+  validateAddBookmark,
 } from "./middleware/sanitizationMiddleware";
 import {
   serveApp,
@@ -54,14 +55,18 @@ app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => 
 
 app.post('/logout', validateUserLoggedIn, logoutUser)
 
-app.get('/api/books/read', validateUserLoggedIn, validateReadBook, (req, res) => {
+app.get('/api/books/read', validateUserInDB, validateReadBook, (req, res) => {
   const bookName = req.query.bookName
   const chapter = req.query.chapter
   library.readChapter(bookName, chapter, (err, data) => {
     if (err)
       res.status(500).send(err)
-    else
-      res.status(200).send(data.toString())
+    else {
+        const user = session.getUserObjectFromSession(req)
+        const bookmark = user.findBookmark(bookName, chapter)
+        const resp = { markdown: data.toString(), bookmark}
+        res.status(200).send(resp)
+    }
   })
 })
 
@@ -73,6 +78,21 @@ app.get('/api/lyrics/read', validateUserLoggedIn, validateReadLyrics, (req, res)
       else
         res.status(200).send(data.toString())
   })
+})
+
+app.post('/api/bookmark', validateUserLoggedIn, validateAddBookmark, (req, res) => {
+    const {
+        bookId,
+        chapterIndex,
+        bookmarkFraction,
+    } = req.body
+    const username = session.getUserFromSession(req)
+    dbAdmin.addBookmarkToUser(username, bookId, chapterIndex, bookmarkFraction, (err) => {
+      if (err)
+        res.status(500).send(err)
+      else
+        res.status(200).send('OK')
+    })
 })
 
 serveSecretMessage(app)

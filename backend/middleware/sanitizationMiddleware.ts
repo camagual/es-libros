@@ -34,3 +34,24 @@ export const validateReadLyrics = (req: any, res: any, next: any) => {
   else
     next()
 }
+
+export const validateAddBookmark = (req: any, res: any, next: any) => {
+  const {
+    bookId,
+    chapterIndex,
+    bookmarkFraction
+  } = req.body
+
+  if (!bookId || bookId === "")
+    res.status(422).send('bookId cannot be empty')
+  else if (!chapterIndex || chapterIndex === "")
+    res.status(422).send('chapterIndex cannot be empty')
+  else if (!bookmarkFraction || bookmarkFraction === "")
+    res.status(422).send('chapterIndex cannot be empty')
+  else {
+      req.body.bookId = parseInt(bookId, 10)
+      req.body.chapterIndex = parseInt(chapterIndex, 10)
+      req.body.bookmarkFraction = parseFloat(bookmarkFraction)
+    next()
+  }
+}

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { readChapter } from '../api'
+import { readChapter, unauthorizedResponseHandler } from '../api'
 import markdownToComponentArray from '../markdown'
 import { getChapterByIndex } from '../server_data/PreloadedStateQueries.js'
+import { scrollByFraction } from '../dom/Scroll'
 import ProgressWheel from '../comp/ProgressWheel'
 
 import './ChapterPage.css'
@@ -28,8 +29,12 @@ const nextIndex = (bookId, i) => {
 
 class ChapterPage extends Component {
 
-  state = {
-    markdown: ""
+  constructor(props) {
+    super(props)
+    this.state = {
+      markdown: ""
+    }
+    this.bookmark = undefined
   }
 
   pageHasChanged = (nextProps) => {
@@ -44,8 +49,6 @@ class ChapterPage extends Component {
     } = nextProps.match.params
 
     return nextBookId !== bookId || nextChapterIndex !== chapterIndex
-
-
   }
 
   fetchChapter = (props) => {
@@ -56,8 +59,10 @@ class ChapterPage extends Component {
     readChapter(bookId, chapterIndex)
       .send()
       .then((resp) => {
-         this.setState({ markdown: resp.text })
-      })
+         const respBody = resp.body
+         this.bookmark = respBody.bookmark
+         this.setState({ markdown: respBody.markdown })
+      }, unauthorizedResponseHandler())
   }
 
   renderChapterText = () => {
@@ -98,6 +103,15 @@ class ChapterPage extends Component {
 
   componentDidMount() {
     this.fetchChapter(this.props)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const didDownloadMarkdown = prevState.markdown === ""
+                            && this.state.markdown !== prevState.markdown
+                            && this.bookmark
+    if (didDownloadMarkdown)
+      scrollByFraction(this.bookmark)
+    this.bookmark = undefined
   }
 }
 

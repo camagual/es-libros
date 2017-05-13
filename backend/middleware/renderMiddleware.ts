@@ -34,18 +34,24 @@ const createTelegram: ((any, string) => string) = (req, username) => {
   return `${username} has requested the website from ${ip}`
 }
 
-export const serveApp = (req, res) => {
-  const username = session.getUserFromSession(req) as string
-  dbAdmin.findUser(username, (user) => {
+const serveAppWithUserData = (req, res, user) => {
     let state: any = { needsLogin: true }
     if (user) {
       state = user.toStateObject({
           bookIndex,
           lyricsIndex,
       })
-      const msg = createTelegram(req, username)
+      const msg = createTelegram(req, user.name)
       sendTelegram(msg)
     }
     enviarHtmlConState(res, state)
+  }
+
+export const serveApp = (req, res) => {
+  const username = session.getUserFromSession(req) as string
+  if (username)
+    dbAdmin.findUser(username, (user) => {
+      serveAppWithUserData(req, res, user)
   })
+    else serveAppWithUserData(req, res, null)
 }

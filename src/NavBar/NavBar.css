@@ -17,6 +17,10 @@ li.right-navbar {
     float: right;
 }
 
+a.navbar-icon:active {
+    background-color: #5b5b5b;
+}
+
 li a.navbar {
     display: block;
     color: white;
