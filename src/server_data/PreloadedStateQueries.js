@@ -1,4 +1,4 @@
-import { bookIndex, lyricsIndex } from './PreloadedState.js'
+import { bookIndex, lyricsIndex, bookmarks } from './PreloadedState.js'
 
 
 const findBookById = (bookId) => {
@@ -34,8 +34,27 @@ const getChapterByIndex = (bookId, chapterIndex) => {
     return selectedBook.chapters[chapterIndex]
   return null
 }
+
+const findBookmarksByBookId = (bookId) => {
+  return Object.keys(bookmarks).filter((key) => {
+    return key.startsWith(`_${bookId}ch`)
+  })
+}
+
+const findLatestBookmarkedChapterByBookId = (bookId) => {
+  const bookmarkKeys = findBookmarksByBookId(bookId)
+  const totalBookmarks = bookmarkKeys.length
+  if (totalBookmarks === 0)
+    return null
+
+  const lastKey = bookmarkKeys[totalBookmarks - 1]
+  const chapterIndexFromKey = lastKey.substring(`_${bookId}ch`.length)
+  return parseInt(chapterIndexFromKey, 10)
+}
+
 module.exports = {
   bookIndex,
+  findLatestBookmarkedChapterByBookId,
   findBookById,
   findSongById,
   getChapterByIndex,

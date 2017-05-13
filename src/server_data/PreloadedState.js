@@ -23,6 +23,7 @@ const testState = {
       "youtube":"https://www.youtube.com/embed/7QdVFQhkL8g"
     }
   ],
+  bookmarks: {},
 }
 
 const serverRenderedState = window.__PRELOADED_STATE__

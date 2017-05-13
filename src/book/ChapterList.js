@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import PlayArrow from 'react-icons/lib/md/play-arrow';
+import Bookmark from 'react-icons/lib/md/bookmark';
 
 import './ChapterList.css'
-import { getChapterListById } from '../server_data/PreloadedStateQueries.js'
+import BottomButton from '../comp/BottomButton.js'
+import {
+  getChapterListById,
+  findLatestBookmarkedChapterByBookId,
+} from '../server_data/PreloadedStateQueries.js'
 
 const ChapterItem = (props) => {
   const {
@@ -20,13 +26,33 @@ const ChapterItem = (props) => {
   )
 }
 
+const getStartButtonProps = (bookId) => {
+    const startLinkUrl = `/book/${bookId}/`
+    const bookmarkedChapter = findLatestBookmarkedChapterByBookId(bookId)
+
+    if (bookmarkedChapter !== null)
+      return {
+        to: startLinkUrl + bookmarkedChapter,
+        text: 'Continuar',
+        iconClass: Bookmark,
+      }
+    else
+      return {
+        to: startLinkUrl + 0,
+        text: 'Comenzar',
+        iconClass: PlayArrow,
+      }
+}
+
 export default class ChapterList extends Component {
+
   render() {
     const bookId = this.props.match.params.bookId
     const chapters = getChapterListById(bookId)
+    const startButtonProps =  getStartButtonProps(bookId)
     return (
       <div>
-      <Link className="read-button" to={`/book/${bookId}/0`}>Comenzar</Link>
+      <BottomButton {...startButtonProps} />
         <h3 className='chapter-list'>Capítulos</h3>
         <ul className='chapter-list'>
           {

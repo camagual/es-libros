@@ -9,25 +9,6 @@ h3.chapter-list {
   text-align: center;
 }
 
-.read-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 0px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 21px;
-    margin: 0;
-    cursor: pointer;
-    overflow: hidden;
-}
-
 li.chapter-list a.chapter-list {
     display: block;
     text-align: left;
