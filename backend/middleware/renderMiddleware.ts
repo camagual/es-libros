@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as session from '../session'
 import * as dbAdmin from '../db/admin'
+import User from '../db/User'
 import { bookIndex, lyricsIndex } from '../library/library'
 import { sendTelegram } from "../bot/telegramAPI"
 
@@ -34,14 +35,14 @@ const createTelegram: ((any, string) => string) = (req, username) => {
   return `${username} has requested the website from ${ip}`
 }
 
-const serveAppWithUserData = (req, res, user) => {
+const serveAppWithUserData = (req, res, user: User) => {
     let state: any = { needsLogin: true }
     if (user) {
       state = user.toStateObject({
           bookIndex,
           lyricsIndex,
       })
-      const msg = createTelegram(req, user.name)
+      const msg = createTelegram(req, user.username)
       sendTelegram(msg)
     }
     enviarHtmlConState(res, state)

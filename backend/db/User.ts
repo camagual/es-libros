@@ -1,4 +1,5 @@
 const JSCompat = require('../compat/JSCompat.js')
+import Bookmark from './Bookmark';
 
 export default class User {
   username: String;
@@ -19,12 +20,12 @@ export default class User {
     this.likedSongs = []
   }
 
-  addBookmarks(bookId: number, chapterIndex: number, bookmarkFraction: number) {
-      this.bookmarks[`_${bookId}ch${chapterIndex}`] = bookmarkFraction
+  addBookmark(bookId: number, chapterIndex: number, bookmarkFraction: number) {
+      this.bookmarks[bookId] = new Bookmark(bookId, chapterIndex, bookmarkFraction)
   }
 
-  findBookmark(bookId: number, chapterIndex: number): number | undefined {
-      return this.bookmarks[`_${bookId}ch${chapterIndex}`]
+  findBookmark(bookId: number): Bookmark | undefined{
+      return this.bookmarks[bookId] as Bookmark | undefined
   }
 
   toStateObject(extraData) {

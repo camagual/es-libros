@@ -27,7 +27,7 @@ export const addBookmarkToUser = (username: string, bookId: number,
     chapterIndex: number, bookmarkFraction: number, callback: (err: Error) => void) => {
     findUser(username, (user) => {
         if (user) {
-            user.addBookmarks(bookId, chapterIndex, bookmarkFraction)
+            user.addBookmark(bookId, chapterIndex, bookmarkFraction)
             updateUser(username, user, callback)
         } else {
             callback(Error('User not found'))

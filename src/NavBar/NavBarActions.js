@@ -5,12 +5,13 @@ import Settings from 'react-icons/lib/md/settings';
 
 import { computeScrollFraction } from '../dom/Scroll.js'
 import { addBookmark, unauthorizedResponseHandler } from '../api.js'
+import { addBookmark as addBookmarkMutation } from '../server_data/PreloadedStateMutations.js'
 
 export const saveBookmark = (bookId, chapterIndex) => {
   const fraction = computeScrollFraction()
   const success = () => {
-      console.log('bookmarked!')
-      window.alert('Marcador guardado! Cuando regreses a esta pagina podrás seguir leyendo desde la misma posición. Puedes cerrar esta ventana.')
+      addBookmarkMutation(bookId, chapterIndex, fraction)
+      window.alert('Marcador guardado! Si cierras esta página podrás seguir leyendo desde la misma posición cuando regreses.')
     }
   const failiure = unauthorizedResponseHandler()
 

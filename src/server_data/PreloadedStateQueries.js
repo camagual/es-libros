@@ -35,26 +35,17 @@ const getChapterByIndex = (bookId, chapterIndex) => {
   return null
 }
 
-const findBookmarksByBookId = (bookId) => {
-  return Object.keys(bookmarks).filter((key) => {
-    return key.startsWith(`_${bookId}ch`)
+const findBookmarkByBookId = (bookId) => {
+  const bookKey = '' + bookId
+  const key = Object.keys(bookmarks).find((key) => {
+    return key ===  bookKey
   })
-}
-
-const findLatestBookmarkedChapterByBookId = (bookId) => {
-  const bookmarkKeys = findBookmarksByBookId(bookId)
-  const totalBookmarks = bookmarkKeys.length
-  if (totalBookmarks === 0)
-    return null
-
-  const lastKey = bookmarkKeys[totalBookmarks - 1]
-  const chapterIndexFromKey = lastKey.substring(`_${bookId}ch`.length)
-  return parseInt(chapterIndexFromKey, 10)
+  return key && bookmarks[key]
 }
 
 module.exports = {
   bookIndex,
-  findLatestBookmarkedChapterByBookId,
+  findBookmarkByBookId,
   findBookById,
   findSongById,
   getChapterByIndex,
