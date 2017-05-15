@@ -42,12 +42,12 @@ const matchSongInPath = (pathname) => {
 const matchSettingsPath = (pathname) => {
   const match = matchPath(pathname, { path: '/settings', exact: true })
   if (match) {
-    return { title: "Ajustes", action: OpenSettingsAction }
+    return { title: "Settings", action: OpenSettingsAction }
   }
 }
 
 export const getTitlePropsFromRoute = (pathname) => {
   return matchChapterPageInPath(pathname) || matchBookInPath(pathname)
   || matchSongInPath(pathname) || matchSettingsPath(pathname)
-  || { title: "Home", action: OpenSettingsAction }
+  || { title: "Main Menu", action: OpenSettingsAction }
 }

@@ -53,7 +53,7 @@ export default class ChapterList extends Component {
     return (
       <div>
       <BottomButton {...startButtonProps} />
-        <h3 className='chapter-list'>Capítulos</h3>
+        <h3 className='chapter-list'>Chapters</h3>
         <ul className='chapter-list'>
           {
             chapters.map((chapterName, i) =>
