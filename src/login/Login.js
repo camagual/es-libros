@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import './Login.css'
+
+import FormError from '../comp/FormError.js'
 import { login } from '../api.js'
 import { validarLogin } from '../validation.js'
 
-const LoginError = (props) => {
-  if(props.error)
-    return <a style={{color: '#FF0000'}}>{props.error}</a>
-  return null
-}
+import './Login.css'
 
 export default class Login extends Component {
 
@@ -39,7 +36,7 @@ export default class Login extends Component {
     return (
       <form className="login-form">
       	<h2>Por favor inicia sesión</h2>
-        <LoginError error={this.state.error} />
+        <FormError error={this.state.error} />
       	<fieldset className="material-login">
       		<input ref={(input) => this.userInput = input} className="material-login" type="text" required/>
       		<hr className="material-login" />

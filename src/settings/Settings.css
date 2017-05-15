@@ -1,15 +1,7 @@
-button.settings {
+div.sign-out.icon-button {
     background-color: #FF4C4C;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    width: 100%;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 0;
-    cursor: pointer;
-    overflow: hidden;
+}
+
+div.sign-out.icon-button:active {
+    background-color: #cc3c3c;
 }

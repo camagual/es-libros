@@ -9,7 +9,13 @@ div.icon-button {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
 label.icon-button {
     display: inline-block;
     margin-left: 24px;
+}
+
+label.no-icon-button {
+    display: block;
+    text-align: center;
 }

@@ -64,7 +64,7 @@ app.get('/api/books/read', validateUserInDB, validateReadBook, (req, res) => {
     else {
         const user = session.getUserObjectFromSession(req)
         const bookmark = user.findBookmark(bookName)
-        const fraction = bookmark && bookmark.fraction 
+        const fraction = bookmark && bookmark.fraction
         const resp = { markdown: data.toString(), bookmark: fraction }
         res.status(200).send(resp)
     }
@@ -94,6 +94,15 @@ app.post('/api/bookmark', validateUserLoggedIn, validateAddBookmark, (req, res) 
       else
         res.status(200).send('OK')
     })
+})
+
+app.post('/api/feedback', validateUserLoggedIn, (req, res) => {
+    const {
+        text,
+    } = req.body
+    const username = session.getUserFromSession(req)
+    sendTelegram(`Feedback from ${username}: ${text}`)
+    res.status(200).send('OK')
 })
 
 serveSecretMessage(app)

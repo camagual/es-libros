@@ -39,6 +39,12 @@ export const addBookmark = (bookId, chapterIndex, bookmarkFraction) => {
   })
 }
 
+export const sendFeedback = (text) => {
+  return request.post('/api/feedback')
+  .send({
+    text,
+  })
+}
 export const logout = () => {
   return request.post('/logout').send()
 }

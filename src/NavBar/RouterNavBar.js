@@ -8,6 +8,7 @@ import LyricsPage from '../lyrics/LyricsPage.js'
 import BookList from '../book/BookList.js'
 import Login from '../login/Login.js'
 import Settings from '../settings/Settings.js'
+import SubmitFeedback from '../settings/SubmitFeedback.js'
 import PreloadedState from '../server_data/PreloadedState'
 import { getTitlePropsFromRoute } from './RouteTitleProps.js'
 
@@ -31,7 +32,8 @@ export default class RouterNavBar extends React.Component {
         <Route exact path="/book/:bookId" component={ChapterList} />
         <Route path="/book/:bookId/:chapterIndex" component={ChapterPage} />
         <Route path="/lyrics/:lyricsId" component={LyricsPage} />
-        <Route path="/settings" component={Settings} />
+        <Route exact path="/settings" component={Settings} />
+        <Route exact path="/feedback" component={SubmitFeedback} />
       </NavBar>
     )
   }
