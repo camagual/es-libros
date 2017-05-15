@@ -1,0 +1,15 @@
+div.icon-button:active {
+    background-color: #3c8c40;
+}
+
+div.icon-button {
+    background-color: #4CAF50; /* Green */
+    width: 100%;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+label.icon-button {
+    display: inline-block;
+    margin-left: 24px;
+}
