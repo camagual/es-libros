@@ -1,19 +1,5 @@
-div.login-screen {
-  background: #EEE;
-  padding-top: 70px;
-}
-form.login-form {
-  font: 14px/1.21 Roboto, 'Helvetica Neue', arial, helvetica, sans-serif;
-  margin: auto;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 60px;
-  background: #FFF;
-  max-width: 700px;
-}
 
-.material-login {
+.material-text {
   position: relative;
   padding: 0;
   margin: 5px;
@@ -21,7 +7,7 @@ form.login-form {
   overflow: visible;
 }
 
-.material-login input {
+.material-text textarea {
   box-sizing: border-box;
   width: 100%;
   padding: 12px 10px 8px;
@@ -34,14 +20,14 @@ form.login-form {
   cursor: text;
 }
 
-.material-login input::-webkit-input-placeholder {
+.material-text textarea::-webkit-input-placeholder {
   -webkit-transition: color 300ms ease;
   transition: color 300ms ease;
 }
-.material-login input:not(:focus)::-webkit-input-placeholder {
+.material-text textarea:not(:focus)::-webkit-input-placeholder {
   color: transparent;
 }
-.material-login hr {
+.material-text hr {
   content: '';
   display: block;
   position: absolute;
@@ -62,12 +48,13 @@ form.login-form {
   visibility: hidden;
   z-index: 10;
 }
-.material-login input:focus ~ hr {
+.material-text textarea:focus ~ hr {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
   visibility: visible;
 }
-.material-login label {
+
+.material-text label {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -81,25 +68,9 @@ form.login-form {
   transition: transform 300ms ease, -webkit-transform 300ms ease;
   pointer-events: none;
 }
-.material-login input:focus ~ label,
-.material-login input:valid ~ label {
+
+.material-text textarea:focus ~ label,
+.material-text textarea:valid ~ label {
   -webkit-transform: scale(0.6);
           transform: scale(0.6);
-}
-
-.login-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    width: 100%;
-    max-width: 700px;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 21px;
-    margin-top: 20px;
-    cursor: pointer;
-    overflow: hidden;
 }
