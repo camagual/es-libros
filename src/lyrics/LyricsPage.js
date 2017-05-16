@@ -4,9 +4,17 @@ import React, { Component } from 'react';
 import './LyricsPage.css'
 
 import ProgressWheel from '../comp/ProgressWheel'
+import YoutubePlayer from './YoutubePlayer'
+import LocalPlayer from './LocalPlayer'
 import { readLyrics } from '../api'
 import markdownToComponentArray from '../markdown'
 import { findSongById } from '../server_data/PreloadedStateQueries.js'
+
+const VideoPlayer = (song) => {
+  if (song.local)
+    return <LocalPlayer url={song.local} />
+  return <YoutubePlayer url={song.youtube} />
+}
 
 export default class LyricsPage extends Component {
 
@@ -18,10 +26,7 @@ export default class LyricsPage extends Component {
     const song = findSongById(this.props.match.params.lyricsId)
     return (
       <div>
-        <div className="music-video">
-          <iframe width="560" height="315" className="yt"
-            src={song.youtube} frameBorder="0" allowFullScreen />
-        </div>
+        { VideoPlayer(song) }
         <div style={{height:'20px'}} />
         { markdownToComponentArray(this.state.markdown, 'lyrics-markdown') }
         <div style={{height:'20px'}} />

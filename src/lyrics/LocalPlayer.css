@@ -1,0 +1,13 @@
+.local-video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 560px) {
+  .local-video {
+    display: block;
+    width:100%;
+    height:100%;
+  }
+}

@@ -31,6 +31,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(session.expressMiddleware);
 
 app.get('/', serveApp)
+app.use('/video', validateUserLoggedIn, Express.static(path.join(__dirname, './videos')))
 app.use('/', Express.static(path.join(__dirname, '../build')))
 
 app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => {
@@ -105,9 +106,10 @@ app.post('/api/feedback', validateUserLoggedIn, (req, res) => {
     res.status(200).send('OK')
 })
 
+
 serveSecretMessage(app)
 
-app.get('*', serveApp)
+//app.get('*', serveApp)
 
 app.listen(port, hostname, function () {
   //eslint-disable-next-line
