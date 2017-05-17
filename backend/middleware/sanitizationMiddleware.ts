@@ -13,6 +13,20 @@ export const validateLoginRequest = (req: any, res: any, next: any) => {
     next()
 }
 
+const parseReadBookQueryParams = (req: any): Error | undefined =>  {
+  const {
+    bookName,
+    chapter,
+  } = req.query
+  try {
+    req.query.bookId = parseInt(bookName, 10)
+    req.query.chapterIndex = parseInt(chapter, 10)
+  } catch(err) {
+    return err
+ }
+}
+
+
 export const validateReadBook = (req: any, res: any, next: any) => {
   const {
     bookName,
@@ -23,8 +37,13 @@ export const validateReadBook = (req: any, res: any, next: any) => {
     res.status(422).send('Missing query parameter "bookName" (book name)')
   else if (!chapter)
     res.status(422).send('Missing query parameter "chapter" (chapter name)')
-  else
-    next()
+  else {
+    const parseError = parseReadBookQueryParams(req)
+    if (parseError)
+      res.status(422).send(parseError)
+    else
+      next()
+  }
 }
 
 export const validateReadLyrics = (req: any, res: any, next: any) => {

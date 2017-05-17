@@ -57,14 +57,14 @@ app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => 
 app.post('/logout', validateUserLoggedIn, logoutUser)
 
 app.get('/api/books/read', validateUserInDB, validateReadBook, (req, res) => {
-  const bookName = req.query.bookName
-  const chapter = req.query.chapter
-  library.readChapter(bookName, chapter, (err, data) => {
+  const bookId = req.query.bookId
+  const chapterIndex = req.query.chapterIndex
+  library.readChapter(bookId, chapterIndex, (err, data) => {
     if (err)
       res.status(500).send(err)
     else {
         const user = session.getUserObjectFromSession(req)
-        const bookmark = user.findBookmark(bookName, chapter)
+        const bookmark = user.findBookmark(bookId, chapterIndex)
         const fraction = bookmark && bookmark.fraction
         const resp = { markdown: data.toString(), bookmark: fraction }
         res.status(200).send(resp)
