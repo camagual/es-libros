@@ -24,8 +24,10 @@ export default class User {
       this.bookmarks[bookId] = new Bookmark(bookId, chapterIndex, bookmarkFraction)
   }
 
-  findBookmark(bookId: number): Bookmark | undefined{
-      return this.bookmarks[bookId] as Bookmark | undefined
+  findBookmark(bookId: number, chapterIndex: number): Bookmark | undefined{
+      const foundBookmark = this.bookmarks[bookId] as Bookmark | undefined
+      if (foundBookmark && foundBookmark.chapterIndex === chapterIndex)
+        return foundBookmark
   }
 
   toStateObject(extraData) {

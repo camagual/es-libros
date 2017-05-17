@@ -64,7 +64,7 @@ app.get('/api/books/read', validateUserInDB, validateReadBook, (req, res) => {
       res.status(500).send(err)
     else {
         const user = session.getUserObjectFromSession(req)
-        const bookmark = user.findBookmark(bookName)
+        const bookmark = user.findBookmark(bookName, chapter)
         const fraction = bookmark && bookmark.fraction
         const resp = { markdown: data.toString(), bookmark: fraction }
         res.status(200).send(resp)
