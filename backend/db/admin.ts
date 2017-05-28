@@ -23,6 +23,12 @@ export const updateUser = (username: string, newUser: User, callback: (err: Erro
   })
 }
 
+export const updateUserLastVisit = (username: string, lastVisit: number,
+  callback: ((err: Error) => void) | undefined) => {
+  const lowercaseName = username.toLowerCase()
+  userdb.update({ username: lowercaseName }, { $set: {lastVisit} }, {}, callback)
+}
+
 export const addBookmarkToUser = (username: string, bookId: number,
     chapterIndex: number, bookmarkFraction: number, callback: (err: Error) => void) => {
     findUser(username, (user) => {
@@ -42,4 +48,14 @@ export const addUser = (username: string, plainPassword: string,
   userdb.insert(newUser, (err) => {
     callback(err, newUser)
   })
+}
+
+export const removeFields = (fieldsToRemove: object, callback:
+  (error: Error, numAffected: number) => void) => {
+  userdb.update({}, { $unset: fieldsToRemove }, { multi: true }, callback)
+}
+
+export const addFields = (fieldsToAdd: object, callback:
+  (error: Error, numAffected: number) => void) => {
+  userdb.update({}, { $set: fieldsToAdd }, { multi: true }, callback)
 }

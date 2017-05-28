@@ -1,3 +1,4 @@
+import { Request } from 'express'
 import * as session from '../session'
 import * as dbAdmin from '../db/admin'
 

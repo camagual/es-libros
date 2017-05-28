@@ -3,11 +3,16 @@ import * as path from 'path'
 import * as session from '../session'
 import * as dbAdmin from '../db/admin'
 import User from '../db/User'
-import { bookIndex, lyricsIndex } from '../library/library'
+import {
+  bookIndex,
+  lyricsIndex,
+  getChangelogRelativeToLastVisit,
+ } from '../library/library'
 import { sendTelegram } from "../bot/telegramAPI"
 
 
-const indexFilePath = path.join(__dirname, '../../build/index.html')
+const indexFilePath = path.join(__dirname, '../../build/index.template.html')
+console.log(indexFilePath)
 
 const colocarStateEnHtml = (html: string, state) => {
   const storePlaceholder = 'void 0'
@@ -35,15 +40,18 @@ const createTelegram: ((any, string) => string) = (req, username) => {
   return `${username} has requested the website from ${ip}`
 }
 
-const serveAppWithUserData = (req, res, user: User) => {
-    let state: any = { needsLogin: true }
+const serveAppWithUserData = (req, res, user: User | null) => {
+    let state: any = { needsLogin: true, changelog: [] }
     if (user) {
+      const changelog = getChangelogRelativeToLastVisit(user.lastVisit)
       state = user.toStateObject({
           bookIndex,
           lyricsIndex,
+          changelog,
       })
       const msg = createTelegram(req, user.username)
       sendTelegram(msg)
+      dbAdmin.updateUserLastVisit(user.username, Date.now(), undefined)
     }
     enviarHtmlConState(res, state)
   }

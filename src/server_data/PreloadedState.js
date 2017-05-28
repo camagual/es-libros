@@ -24,6 +24,12 @@ const testState = {
     }
   ],
   bookmarks: {},
+  changelog: [
+    {
+      date: 1495995097127,
+      text: "New stuff"
+    }
+  ],
 }
 
 const serverRenderedState = window.__PRELOADED_STATE__

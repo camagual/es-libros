@@ -4,11 +4,11 @@ import PlayArrow from 'react-icons/lib/md/play-arrow';
 import Bookmark from 'react-icons/lib/md/bookmark';
 
 import './ChapterList.css'
-import BottomButton from '../comp/BottomButton.js'
+import BottomButton from '../../comp/BottomButton.js'
 import {
   getChapterListById,
   findBookmarkByBookId,
-} from '../server_data/PreloadedStateQueries.js'
+} from '../../server_data/PreloadedStateQueries.js'
 
 const ChapterItem = (props) => {
   const {

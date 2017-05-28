@@ -24,13 +24,13 @@ import {
   serveApp,
 } from "./middleware/renderMiddleware";
 
-const hostname = process.env.PRODUCTION ? '127.0.0.1' : undefined
+const hostname: any = process.env.PRODUCTION ? '127.0.0.1' : undefined
 const app = Express()
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(session.expressMiddleware);
 
-app.use('/video', validateUserLoggedIn, Express.static(path.join(__dirname, './videos')))
+app.use('/video', validateUserLoggedIn, Express.static(path.join(__dirname, './media/videos')))
 app.use('/', Express.static(path.join(__dirname, '../build')))
 
 app.post('/login', validateUserNotLoggedIn, validateLoginRequest, (req, res) => {
@@ -87,7 +87,7 @@ app.post('/api/bookmark', validateUserLoggedIn, validateAddBookmark, (req, res) 
         chapterIndex,
         bookmarkFraction,
     } = req.body
-    const username = session.getUserFromSession(req)
+    const username: any = session.getUserFromSession(req)
     dbAdmin.addBookmarkToUser(username, bookId, chapterIndex, bookmarkFraction, (err) => {
       if (err)
         res.status(500).send(err)

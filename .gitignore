@@ -16,9 +16,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-backend/books/
-backend/lyrics/
-backend/videos/
+backend/media/
 backend/*.js
 backend/db/*.js
 backend/middleware/*.js

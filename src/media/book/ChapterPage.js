@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { readChapter, unauthorizedResponseHandler } from '../api'
-import markdownToComponentArray from '../markdown'
-import { getChapterByIndex } from '../server_data/PreloadedStateQueries.js'
-import { scrollByFraction } from '../dom/Scroll'
-import ProgressWheel from '../comp/ProgressWheel'
+import { readChapter, unauthorizedResponseHandler } from '../../api'
+import markdownToComponentArray from '../../markdown'
+import { getChapterByIndex } from '../../server_data/PreloadedStateQueries.js'
+import { scrollByFraction } from '../../dom/Scroll'
+import ProgressWheel from '../../comp/ProgressWheel'
 
 import './ChapterPage.css'
 

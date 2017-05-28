@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import './BookList.css'
-import { bookIndex, lyricsIndex } from '../server_data/PreloadedState.js'
+import './MediaList.css'
+import WhatsNewBox from './WhatsNewBox'
+import { bookIndex, lyricsIndex, changelogMarkdown } from '../server_data/PreloadedStateQueries.js'
 
 const BookItem = (props) => {
   const book = props.book
@@ -32,14 +33,30 @@ const LyricsItem = (props) => {
   )
 }
 
-export default class BookList extends Component {
+export default class MediaList extends Component {
 
-  static propTypes = {
+  constructor(props) {
+    super(props)
+    this.state = {
+      changelog: changelogMarkdown,
+    }
+  }
+
+  removeChangelog = () => {
+    this.setState({ changelog: [] })
+  }
+
+  renderChangelog = () => {
+    const changelog = this.state.changelog
+    if (changelog.length > 0)
+      return <WhatsNewBox changelog={changelog} onDialogClosed={this.removeChangelog} />
+    return null
   }
 
   render() {
     return (
       <div>
+        { this.renderChangelog() }
         <h2 className='media-list'>Books</h2>
         <ul className='book-list'>
           {

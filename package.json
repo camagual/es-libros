@@ -9,8 +9,6 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "client-sessions": "^0.8.0",
-    "commonmark": "^0.27.0",
-    "commonmark-react-renderer": "^4.3.2",
     "crypto-js": "^3.1.9-1",
     "express": "^4.15.2",
     "nedb": "^1.8.0",
@@ -18,6 +16,7 @@
     "react-dom": "^15.5.4",
     "react-icons": "^2.2.3",
     "react-router-dom": "^4.1.1",
+    "simple-commonmark-react": "^0.4.0",
     "superagent": "^3.5.2",
     "tgbots": "^0.8.2"
   },
@@ -33,11 +32,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build/index.html build/index.template.html",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "tsc": "tsc ./backend/server.ts",
+    "tsc": "tsc ./backend/server.ts --lib es2015",
     "server": "node ./backend/server.js",
-    "addUser": "tsc ./backend/db/addUser.ts && node ./backend/db/addUser.js"
+    "addUser": "tsc ./backend/db/addUser.ts && node ./backend/db/addUser.js",
+    "removeFields": "tsc ./backend/db/removeFields.ts && node ./backend/db/removeFields.js",
+    "addFields": "tsc ./backend/db/addFields.ts && node ./backend/db/addFields.js"
   }
 }

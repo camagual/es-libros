@@ -2,5 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "strictNullChecks": true,
+        "target": "es5",
+        "lib": [ "es2015" ]
     }
 }

@@ -1347,16 +1347,6 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-commonmark-react-renderer@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/commonmark-react-renderer/-/commonmark-react-renderer-4.3.2.tgz#f30cdebd66141eef45ccd2d82fc00861e1e1f747"
-  dependencies:
-    in-publish "^2.0.0"
-    lodash.assign "^4.2.0"
-    lodash.isplainobject "^4.0.6"
-    pascalcase "^0.1.1"
-    xss-filters "^1.2.6"
-
 commonmark@^0.27.0:
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/commonmark/-/commonmark-0.27.0.tgz#d86c262b962821e9483c69c547bc58840c047b34"
@@ -2825,10 +2815,6 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 
-in-publish@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"
-
 indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
@@ -3635,10 +3621,6 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
-lodash.isplainobject@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
-
 lodash.keys@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
@@ -4223,10 +4205,6 @@ parsimmon@^0.5.0:
   resolved "https://registry.yarnpkg.com/parsimmon/-/parsimmon-0.5.1.tgz#247c970d7d5e99a51115b16a106de96f0eb9303b"
   dependencies:
     pjs "5.x"
-
-pascalcase@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
 path-browserify@0.0.0:
   version "0.0.0"
@@ -5029,7 +5007,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@2.67.0:
+request@2.67.0, request@2.x, request@^2.45.0:
   version "2.67.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.67.0.tgz#8af74780e2bf11ea0ae9aa965c11f11afd272742"
   dependencies:
@@ -5054,7 +5032,7 @@ request@2.67.0:
     tough-cookie "~2.2.0"
     tunnel-agent "~0.4.1"
 
-request@2.x, request@^2.45.0, request@^2.79.0, request@^2.81.0:
+request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -5274,6 +5252,12 @@ sigmund@~1.0.0:
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-commonmark-react@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/simple-commonmark-react/-/simple-commonmark-react-0.4.0.tgz#3188f19e8ccab74844f9cb0893cfef5ba75e3153"
+  dependencies:
+    commonmark "^0.27.0"
 
 slash@^1.0.0:
   version "1.0.0"
@@ -6163,10 +6147,6 @@ xml-name-validator@^2.0.1:
 xregexp@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-2.0.0.tgz#52a63e56ca0b84a7f3a5f3d61872f126ad7a5943"
-
-xss-filters@^1.2.6:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/xss-filters/-/xss-filters-1.2.7.tgz#59fa1de201f36f2f3470dcac5f58ccc2830b0a9a"
 
 "xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0:
   version "4.0.1"

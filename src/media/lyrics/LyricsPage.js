@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 
 import './LyricsPage.css'
 
-import ProgressWheel from '../comp/ProgressWheel'
+import ProgressWheel from '../../comp/ProgressWheel'
 import YoutubePlayer from './YoutubePlayer'
 import LocalPlayer from './LocalPlayer'
-import { readLyrics } from '../api'
-import markdownToComponentArray from '../markdown'
-import { findSongById } from '../server_data/PreloadedStateQueries.js'
+import { readLyrics } from '../../api'
+import markdownToComponentArray from '../../markdown'
+import { findSongById } from '../../server_data/PreloadedStateQueries.js'
 
 const VideoPlayer = (song) => {
   if (song.local)
