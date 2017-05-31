@@ -24,7 +24,7 @@ export default class WhatsNewBox extends Component {
       <div className='changelog'>
         <CloseButton onDialogClosed={onDialogClosed}  />
         <h4>{title}</h4>
-        { markdownToComponentArray(changelog, 'changelog') }
+        { markdownToComponentArray(changelog, 'changelog', true) }
       </div>
     )
   }

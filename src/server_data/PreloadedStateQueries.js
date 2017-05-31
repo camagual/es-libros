@@ -2,20 +2,24 @@ import { bookIndex, lyricsIndex, bookmarks, changelog } from './PreloadedState.j
 
 
 const findBookById = (bookId) => {
-  let id = bookId
-  if (typeof bookId === 'string')
-    id = parseInt(id, 10)
-  if (id >= 0 && id < bookIndex.length)
-    return bookIndex[id]
+  if (bookIndex) {
+    let id = bookId
+    if (typeof bookId === 'string')
+      id = parseInt(id, 10)
+    if (id >= 0 && id < bookIndex.length)
+      return bookIndex[id]
+  }
   return null
 }
 
 const findSongById = (lyricsId) => {
   let id = lyricsId
-  if (typeof lyricsId === 'string')
-    id = parseInt(id, 10)
-  if (id >= 0 && id < lyricsIndex.length)
-    return lyricsIndex[id]
+  if (lyricsIndex) {
+    if (typeof lyricsId === 'string')
+      id = parseInt(id, 10)
+    if (id >= 0 && id < lyricsIndex.length)
+      return lyricsIndex[id]
+    }
   return null
 }
 
@@ -43,7 +47,8 @@ const findBookmarkByBookId = (bookId) => {
   return key && bookmarks[key]
 }
 
-const changelogMarkdown = changelog.reduce((acc, update) => acc + `- ${update.text}\n`, '')
+const changelogMarkdown = changelog ? changelog.reduce((acc, update) => acc + `- ${update.text}\n`, '')
+                                    : ''
 
 module.exports = {
   bookIndex,

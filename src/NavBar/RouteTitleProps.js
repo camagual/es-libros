@@ -1,6 +1,7 @@
 import { matchPath } from 'react-router-dom'
 import { findBookById, findSongById } from '../server_data/PreloadedStateQueries'
 import { SaveBookmarkAction, OpenSettingsAction } from './NavBarActions'
+import PreloadedState from '../server_data/PreloadedState'
 
 const matchChapterPageInPath = (pathname) => {
   const match = matchPath(pathname, { path: '/book/:bookId/:chapterIndex', exact: false })
@@ -46,8 +47,12 @@ const matchSettingsPath = (pathname) => {
   }
 }
 
+const matchLogin = () => {
+  if (PreloadedState.needsLogin)
+    return { title: 'Log In', action: OpenSettingsAction }
+}
 export const getTitlePropsFromRoute = (pathname) => {
-  return matchChapterPageInPath(pathname) || matchBookInPath(pathname)
+  return matchLogin() || matchChapterPageInPath(pathname) || matchBookInPath(pathname)
   || matchSongInPath(pathname) || matchSettingsPath(pathname)
   || { title: "Main Menu", action: OpenSettingsAction }
 }

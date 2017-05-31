@@ -5253,9 +5253,13 @@ signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-simple-commonmark-react@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/simple-commonmark-react/-/simple-commonmark-react-0.4.0.tgz#3188f19e8ccab74844f9cb0893cfef5ba75e3153"
+simple-commonmark-react-router@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/simple-commonmark-react-router/-/simple-commonmark-react-router-0.1.0.tgz#aae5a85bd828772ba44a6a2bc28e7f16945426a2"
+
+simple-commonmark-react@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/simple-commonmark-react/-/simple-commonmark-react-0.5.0.tgz#df1dcd64cfb09e9b5216481f30a6b62c2c7f662d"
   dependencies:
     commonmark "^0.27.0"
 

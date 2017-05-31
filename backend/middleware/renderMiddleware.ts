@@ -12,7 +12,6 @@ import { sendTelegram } from "../bot/telegramAPI"
 
 
 const indexFilePath = path.join(__dirname, '../../build/index.template.html')
-console.log(indexFilePath)
 
 const colocarStateEnHtml = (html: string, state) => {
   const storePlaceholder = 'void 0'
