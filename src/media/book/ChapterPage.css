@@ -52,8 +52,7 @@ p.book-markdown {
   margin: auto;
   padding: 14px;
   text-rendering: optimizeLegibility;
-  text-align: justify;
-  text-justify: inter-word;
+  text-align: left;
   text-indent: 20px;
   max-width: 700px;
 }
