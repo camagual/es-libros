@@ -17,6 +17,32 @@ h3.book-markdown {
   padding-bottom:3px;
 }
 
+h4.book-markdown {
+  font-family: 'ITC Charter';
+  font-size: 21px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 14px;
+  text-rendering: optimizeLegibility;
+  max-width: 700px;
+  padding-bottom:3px;
+}
+
+ul.book-markdown {
+  font-family: 'ITC Charter';
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 21px;
+  line-height: 33.1833px;
+  padding: 14px;
+  text-rendering: optimizeLegibility;
+  max-width: 700px;
+  list-style-position: inside;
+  list-style-type: square;
+}
+
 p.book-markdown {
   font-family: 'ITC Charter';
   font-size: 21px;
