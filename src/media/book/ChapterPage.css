@@ -3,6 +3,20 @@ h2.book-markdown {
   text-align: center;
 }
 
+h3.book-markdown {
+  font-family: 'ITC Charter';
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 14px;
+  text-rendering: optimizeLegibility;
+  max-width: 700px;
+  border-bottom:1px solid #CCC;
+  padding-bottom:3px;
+}
+
 p.book-markdown {
   font-family: 'ITC Charter';
   font-size: 21px;
@@ -12,7 +26,8 @@ p.book-markdown {
   margin: auto;
   padding: 14px;
   text-rendering: optimizeLegibility;
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-word;
   text-indent: 20px;
   max-width: 700px;
 }
